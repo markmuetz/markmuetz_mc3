@@ -24,10 +24,12 @@
 
 \begin{document}
 
+\newgeometry{margin=2.0cm, top=1.8cm}
+
 \begin{center}
-    \Large{\textbf{Monitoring Committee Report III}}\\[0.15cm]
+    \Large{\textbf{Monitoring Committee Report III}}\\[0.1cm]
     \large{Mark Muetzelfeldt}\\
-    \normalsize{9.30am on Monday 19\ts{th} December 2016 in 2U13}\\[0.15cm]		
+    \normalsize{9.30am on Monday 19\ts{th} December 2016 in 2U13}\\[0.1cm]		
     \rule{\textwidth}{0.2mm}
     \textbf{Project Title: }Development of scale-awareness in the representation of
     convective cloud systems\\
@@ -40,7 +42,7 @@
 \section{Project overview}
 \label{sec:Project Overview}
 
-To develop a scale-aware parametrization of deep convection, it is necessary to know what the desired effect of the parametrization will be. In a similar vein to \cite{plant2008stochastic}, and more recently \cite{sakradzija2016stochastic} for the shallow cumulus case, the approach taken in this project will be to run high-resolution models to act as the truth, and build the parametrization so that it approximates this truth. In the parametrized case, as the resolution of the model increases, fewer convective clouds will be present in each grid-cell, leading the the breakdown of the quasi-equilibrium assumption of \cite{arakawa1974interaction}. In this case, it is sensible to think of the relationship between the grid scale variables and the parametrized subgrid fluxes as being a statistical one, with the Probability Distribution Function (PDF) of finding a cloud with a given mass flux in a cell being controlled be the grid-mean properties, instead of the subgrid fluxes being deterministically controlled by these properties. In \cite{cohen2006fluctuations}, they found the surprising result that in a Cloud Resolving Model (CRM), convective organization did not seem to have a large effect on the overall statistics of the mass flux of the cloud field, even though the it was clearly visible in the location of the clouds. This could be due to a number of factors, e.g. the shear profile that they applied or the resolution of the model that they are using.
+To develop a scale-aware parametrization of deep convection, it is necessary to know what the desired effect of the parametrization will be. In a similar vein to \cite{plant2008stochastic}, and more recently \cite{sakradzija2016stochastic} for the shallow cumulus case, the approach taken in this project will be to run high-resolution models to act as the truth, and build the parametrization so that it approximates this truth. In the parametrized case, as the resolution of the model increases, fewer convective clouds will be present in each grid-cell, leading the the breakdown of the quasi-equilibrium assumption of \cite{arakawa1974interaction}. In this case, it is sensible to think of the relationship between the grid scale variables and the parametrized subgrid fluxes as being a statistical one, with the Probability Distribution Function (PDF) of finding a cloud with a given mass flux in a cell being controlled by the grid-mean properties, instead of the subgrid fluxes being deterministically controlled by these properties. In \cite{cohen2006fluctuations}, they found the surprising result that in a Cloud Resolving Model (CRM), convective organization did not seem to have a large effect on the overall statistics of the mass flux of the cloud field, even though it was clearly visible in the location of the clouds. This could be due to a number of factors, e.g. the shear profile that they applied, the limited number of organized cases that they studied or the resolution of the model that they used.
 
 Taking this as a cue, in this project I will look into the effect of shear driven organization in a CRM in a Radiative-Convective Equilibrium (RCE) case. However, I will attempt to produce a more organized cloud field, representative of a squall line for example. Also, the resolution of the model will be higher, at \SI{100}{m} or higher compared with the \SI{2}{km} of the \cite{cohen2006fluctuations} model. The goal will be to reproduce some squall line like features, and then analyse the cloud statistics under this regime. With this in mind, the specific questions that I would like to address are as follows:
 
@@ -51,13 +53,15 @@ Taking this as a cue, in this project I will look into the effect of shear drive
     \item How can information about fluxes in a high-resolution idealized model be incorporated into a lower-resolution model's parametrization scheme?
 \end{enumerate}
 
-Additionally, it would be interesting to see how this deep convection scheme, once it has been developed, behaves in a global simulation, in terms of how it reproduces climatologies and large scale organization.
+Additionally, it would be interesting to see how this deep convection scheme, once it has been developed, behaves in a global simulation, in terms of how it reproduces climatologies and large-scale organization.
 
-The role of resolution will be analysed from the perspective of the convective grey-zone, broadly defined as horizontal resolutions of 10-100 km. Here, there is reason to believe that the stochastic nature of the parametrization will allow it to scale in a sensible way \parencite{sakradzija2016stochastic}. Parametrized models can be run in this range of resolutions, and their output can be compared to the coarse-grained output from the CRM. This will allow for the validation of the parametrization scheme, as well as a characterization of its shortcomings. It will also act as a test-bed for making changes to the parametrization scheme to represent the effects of organization in this scheme. 
+The role of resolution will be analysed from the perspective of the convective grey-zone, broadly defined as horizontal resolutions of 10-100 km. Stochastic schemes lend themselves well to being scale-aware as there is a natural way of increasing the grid-scale variability as the resolution of the model increases \parencite{plant2008stochastic, sakradzija2016stochastic}. Parametrized models can be run in this range of resolutions, and their output can be compared to the coarse-grained output from the CRM. This will allow for the validation of the parametrization scheme, as well as a characterization of its shortcomings. It will also act as a test-bed for making changes to the parametrization scheme to represent the effects of organization in this scheme. 
 
 % Momentum fluxes.
 
 % LESs being fed into p13n schemes?
+
+\resetgeometry
 
 \subsection{Background reading}
 
@@ -78,7 +82,7 @@ Here the angle brackets denote an ensemble mean. $p(M)$ is the probability of fi
 \begin{figure}[hbp!]
     \centering
     \includegraphics[width=400px]{figures/CraigAndCohenFig2}
-    \caption{Theoretical PDF of total mass flux, $p(M)$, for: (a) $\langle N \rangle = 68$; $\langle N \rangle = 5$; $\langle m \rangle = 10^7$ \SI{}{kg.s^{-1}} in both cases. Taken from \cite{craig2006fluctuations}, their Fig. 2.}
+    \caption{Theoretical PDF of total mass flux, $p(M)$, for: (a) $\langle N \rangle = 68$; (b) $\langle N \rangle = 5$; $\langle m \rangle = 10^7$ \SI{}{kg.s^{-1}} in both cases. Taken from \cite{craig2006fluctuations}, their Fig. 2.}
     \label{fig:pdf_mass_flux}
 \end{figure}
 
@@ -89,6 +93,8 @@ In their second paper they go on to match these theoretical findings to output f
 In previous Monitoring Committee reports I have picked one or two parametrization schemes and looked into them in some detail. Now I am trying to take a step back and to find the general features that schemes have in common, e.g. the mass flux paradigm that is common to many schemes. To do this, I have been reading review articles such as the one by \cite{arakawa2004cumulus}, which provides a good history of parametrization schemes and emphasizes the similarity of their outcomes, even when they have been formulated in quite different ways. 
 
 The chapter on ``Convective parameterizations'' in the book by \cite{stensrud2009parameterization} tries to classify the various schemes by certain criteria. He uses the criterion of ``deep-layer control'' as one way of distinguishing between the various schemes, as well as talking about triggering and closures of the schemes.
+
+I have also started reading into shear-driven organization, to get a sense of how a range of shear profiles can be developed for the purposes of analyzing the effects of shear in numerical simulations. Additionally, I have done some preliminary reading looking at how momentum fluxes can be included in a parametrization scheme.
 % Parametrization overviews.
 % Arakawa 2004
 % Stensrud
@@ -101,7 +107,7 @@ The chapter on ``Convective parameterizations'' in the book by \cite{stensrud200
 
 \subsubsection{Moisture conservation in semi-lagrangian models}
 \label{sec:MC_in_SL}
-The issues described below in Sections \ref{sec:modelling} and \ref{sec:MC_sensitivity} with moisture non-conservation have necessitated that I understand more about Moisture Conservation (MC) schemes in the UM. Although I have not read all these papers in detail, I have taken useful information from these for the purposes of understanding which MC scheme I have been using. For current purposes, the three schemes that are relevant are the Priestley scheme \parencite{priestley1993quasi}, the All Dancing All Singing (ADAS) scheme \parencite{zerroukat2010simple} and the Optimized Conservative Filter (OCF) scheme \parencite{zerroukat2015monotonic} (other schemes are relevant when considering nested Limited Area Models and flow across their boundaries). These schemes perform roughly the same job, and without going into detail they are used to ensure MC in the UM by diagnosing any non-conservation at each timestep and optimally adding or removing moisture from the model to make up the imbalance.
+The issues described below in Sections \ref{sec:modelling} and \ref{sec:MC_sensitivity} with moisture non-conservation have necessitated that I understand more about Moisture Conservation (MC) schemes in the UM. For current purposes, the three schemes that are relevant are the Priestley scheme \parencite{priestley1993quasi}, the All Dancing All Singing (ADAS) scheme \parencite{zerroukat2010simple} and the Optimized Conservative Filter (OCF) scheme \parencite{zerroukat2015monotonic} (other schemes are relevant when considering nested Limited Area Models and flow across their boundaries). These schemes perform roughly the same job, and without going into detail they are used to ensure MC in the UM by diagnosing any non-conservation at each timestep and optimally adding or removing moisture from the model to make up the imbalance.
 % Moisture conservation.
 % a few...
 % eternal fountain.
@@ -126,7 +132,7 @@ The main portion of this work involved performing sensitivity tests to various a
     \label{fig:MC_on_off}
 \end{figure}
 
-As a recent update on this work, a critical bug in the iUM has been found. The Smagorinsky code was found to be diffusive only in the $x$ direction, and not in the $y$ direction, leading to a collapse of the convection into 1D structures in the $x$ direction. An example of this is shown in Fig. \ref{fig:precip_MC_on_off}. At the time, I believed that this behaviour was caused by the model dynamics acting as it should combined with the relaxation back to a mean wind across the domain, but in retrospect it appears that this is in fact a manifestation of the bug with the Smagorinsky code. Now that this bug has been identified, a fix has also been added to the vn10.6 iUM branch. Testing that this fix works for me will be a priority.
+As a recent update on this work, a critical bug in the iUM has been found. This bug was found just before the ParaCon plenary (see Section \ref{sec:paracon_plenary}), and initiated a fair amount of discussion from those attending. The Smagorinsky code was found to be diffusive only in the $x$ direction, and not in the $y$ direction, leading to a collapse of the convection into 1D structures in the $x$ direction. An example of this is shown in Fig. \ref{fig:precip_MC_on_off}. At the time, I believed that this behaviour was caused by the model dynamics acting as it should combined with the relaxation back to a mean wind across the domain, but in retrospect it appears that this is in fact a manifestation of the bug with the Smagorinsky code. Now that this bug has been identified, a fix has also been added to the vn10.6 iUM branch. Testing that this fix works for me will be a priority.
 
 \begin{figure}[htp!]
     \centering
@@ -142,7 +148,7 @@ Investigating this MC issue has taken up a lot of my time. It has, however, been
 % Other analysis
 % I have been using the output I have to work on further analysis. Investigating the MC issue required me to analyse domain mean quantities of e.g. specific moisture vapour, $q$, cloud liquid water, $qcl$, and other hydrometeors. On comparison of the resulting 2D fields that I got from performing the mass weighted vertically integral of these quantities with the 2D fields available in the UM diagnostics, I noticed a discrepancy which I believe is due to an inconsistency of the way that these fields are calculated in the UM. 
 
-I have performed some rudimentary cloud-cell tracking. This worked by using the mass weighted vertical integral of $qcl$ as measure of where the clouds were, with an arbitrary threshold value being picked to perform the cell tracking. Contiguous ``blobs'' of clouds with a value above these thresholds were detected, and then tracked from one timestep to the next by looking at overlaps (the output frequency was at high-temporal resolution of \SI{60}{s}). This allowed me to generate animations of vertical profiles of the moisture variables for the MC on and off experiments. This code, or similar code obtained from either Juwon Kim and Thorwald Stein or another group, will let me build more detailed cloud lifetime statistics in the future. 
+I have performed some rudimentary cloud-cell tracking. This worked by using the mass weighted vertical integral of $qcl$ as measure of where the clouds were, with an arbitrary threshold value being picked to perform the cell tracking. Contiguous ``blobs'' of clouds with a value above these thresholds were detected, and then tracked from one timestep to the next by looking at overlaps. This allowed me to generate animations of vertical profiles of the moisture variables for the MC on and off experiments. This code, or similar code obtained from either Juwon Kim and Thorwald Stein or another group, will let me build more detailed cloud lifetime statistics in the future. 
 
 % omnium
 % Doing this analysis I have tried to be rigorous in recording the runs I have done and making sure that the work that I do is reproducible. I am keeping a record of all the runs I am doing and storing the output on the ARCHER RDF, since the end of August I have done 38 successful runs. For results analysis, I am using a set of tools called omnium, which I have written to allow me to theoretically reproduce any figures or data I need from the iUM output. It also has the capability to show 3D fields in realtime, which allows for e.g. visualization of clouds to pick interesting clouds for further analysis.
@@ -151,25 +157,25 @@ I have performed some rudimentary cloud-cell tracking. This worked by using the 
 % As set out in my PhD Plan...
 
 \subsection{PhD plan}
-It is easy to get lost in the day-to-day details of what has to be done next. To make it easier to keep the big picture in mind, I have made a PhD plan that breaks the work down into manageable chunks, with defined deliverables and timelines. In broad terms, Phase 0 is where I am now, which involves making sure that the model is behaving as it should do, and Phase 1 will form the next part of my work, investigating cloud statistics and organization in high-resolution models, which will be described in detail in Section 
-\ref{sec:high_res_modelling}.
+It is easy to get lost in the day-to-day details of what has to be done next. To make it easier to keep the big picture in mind, I have produced a PhD planning document that breaks the work down into manageable chunks, with defined deliverables and timelines. This is a ``living document'' that I will update over the course of my PhD, to reflect the incremental changes that are necessary as my PhD progresses. In broad terms, Phase 0 is where I am now, which involves making sure that the model is behaving as it should do, and Phase 1 will form the next part of my work, investigating cloud statistics and organization in high-resolution models, which will be described in detail in Section \ref{sec:high_res_modelling}.
 
 \subsection{Moisture non-conservation}
 
 The first thing I will do is to see whether the fix for the critical bug discussed in Section \ref{sec:MC_sensitivity} works as intended. This may well fix the MC issues I have seen entirely, or it may drastically reduce the magnitude of the problem. If there is some residual moisture non-conservation, I may still want to run with an MC scheme, such as the OCF scheme currently being used. This will mean that I should still put some work in to determining exactly how much moisture the scheme is removing.
 
-To do this, I will finish off my investigation into the moisture non-conservation issue. This will involve adding in a 3D diagnostic to determine how much moisture is being removed by the MC scheme. I have been in touch with Mohamed Zerroukat at the Met Office, who implemented most of the MC schemes in the UM, to get details on how to do this. He has suggested a suitable modification to the code to add this in, and this should allow me to create a diagnostic for this field. With this diagnostic, I will be able to look at where the moisture is being added or removed in the model, and what the magnitude of the amount of water that has to be added or removed is. I am mindful that this has taken up a lot of my time in the last 6 months, and that I need to move on from this early in 2017.
+To do this, I will finish off my investigation into the moisture non-conservation issue. This will involve adding in a 3D diagnostic to determine how much moisture is being removed by the MC scheme. I have been in touch with Mohamed Zerroukat at the Met Office, who implemented most of the MC schemes in the UM, to get details on how to do this. He has suggested a suitable modification to the code to add this in, and this should allow me to create a diagnostic for this field. With this diagnostic, I will be able to look at where the moisture is being added or removed, and what the magnitude of the amount of water that has to be added or removed is. I am mindful that this has taken up a lot of my time in the last 6 months, and that I need to move on from this early in 2017.
 
 \subsection{High-resolution modelling}
 \label{sec:high_res_modelling}
-Following this, I will begin work on the high-resolution modelling, deriving cloud statistics and information about fluxes of energy, moisture and momentum, as set out in Phase 1 of my PhD plan. I will perform experiments with and without vertical shear across the domain, to characterize the change in cloud statistics when organization is present or absent. This will form a self-contained piece of work, which will have content that will fit nicely into one chapter of my thesis, and will, with the suitable inclusion of a small literature review, form the basis of a paper.
+Following this, I will begin work on the high-resolution modelling, deriving cloud statistics and information about fluxes of energy, moisture and momentum, as set out in Phase 1 of my PhD plan. I will perform experiments with and without vertical shear across the domain, to characterize the change in cloud statistics when organization is present or absent. This will form a self-contained piece of work, which will have content that will fit nicely into one chapter of my thesis, and will also form a substantive piece of that I will be able to present at the next monitoring committee.
 
 In the longer term, I will start using the results from the high-resolution modelling to inform the design of a stochastic scale-aware parametrization that is based on the \cite{plant2008stochastic} scheme, with the novel addition of either or both of momentum fluxes or large-scale organization depending on the preliminary results of the analysis.
 
 \section{Training record}
 
 \subsection{ParaCon plenary in Leeds}
-The second ParaCon (Parametrized Convection) plenary was held in Leeds on the 7\ts{th}-8\ts{th} of December. This was a chance for the five main different projects to get together and discuss progress as well as the potential for collaboration. One key part of the project is the generation of high-resolution output that will be used by a few of the different projects for a variety of different purposes, such as the statistical analysis of cloud fields and the analysis of fluxes of heat, moisture as well as potentially higher order quantities. One of the initial test cases that will be run is an RCE experiment, using the iUM and MONC (Met Office NERC Cloud Model). As such, there is a large degree of overlap between these runs and the runs I will need for my PhD, and the potential for me to use some of these output data as part of my studies and analyses. These runs could potentially use very large domains and high-resolutions, meaning that they could be invaluable for analysing the upscale organization of convection.
+\label{sec:paracon_plenary}
+The second ParaCon (Parametrized Convection) plenary was held in Leeds on the 7\ts{th}-8\ts{th} of December. This was a chance for the five main projects to get together and discuss progress as well as the potential for collaboration. One key part of the project is the generation of high-resolution output that will be used by a few of the different projects for a variety of different purposes, such as the statistical analysis of cloud fields and the analysis of fluxes of heat, moisture as well as potentially higher order quantities. One of the initial test cases that will be run is an RCE experiment, using the iUM and MONC (Met Office NERC Cloud Model). As such, there is a large degree of overlap between these runs and the runs I will need for my PhD, and the potential for me to use some of these output data as part of my studies and analyses. These runs could potentially use very large domains and high-resolutions, meaning that they could be invaluable for analysing the upscale organization of convection.
 
 At the conference I presented slides of my work into moisture non-conservation (in place of a poster). The talks I attended provided an overview of the work of the various groups, some were useful in terms of finding out what is going with the iUM/MONC, and others gave me references to interesting papers that I would like to follow up on. The discussion sessions offered a good chance to interact with a variety of people on topics that are relevant to my PhD, such as the link between convection and upscale organization and what diagnostics will be required from the high-resolution models. It was also a good chance to build connections with other PhD students and Post-Docs from other institutions.
 
@@ -201,9 +207,9 @@ In November I talked in Mesoscale group for 50 minutes on the work I have been d
   \item RRDP: You and your supervisor (11/11/2015)
   \item RRDP: Quality assurance in research (18/11/2015)
   \item RRDP (equivalent): UM Training (16-18/12/2015)
-  \item RRDP (equivalent): Preparing to teach: Introduction to teaching and Learning (26/01/2016)
-  \item Preparing to teach: Marking and feedback (26/01/2016)
-  \item Preparing to teach: Laboratory demonstrating and leading small groups (27/01/2016)
+  \item RRDP (equivalent): Preparing to teach: Introduction to teaching and Learning (26/1/2016)
+  \item Preparing to teach: Marking and feedback (26/1/2016)
+  \item Preparing to teach: Laboratory demonstrating and leading small groups (27/1/2016)
   \item MONC Training course (9-10/2/2016)
   \item RRDP (equivalent): Fairbrother Lecture ``A slippery situation: melting ice in Antarctica'' (4/5/2016)
   \item ECMWF Parametrization of subgrid physical processes (16-20/5/2016)
@@ -213,6 +219,9 @@ In November I talked in Mesoscale group for 50 minutes on the work I have been d
 
 \begin{itemize}
   \item RRDP: Managing your research project (17/11/2016)
+  \item RRDP (booked): How to write a thesis (24/1/2017)
+  \item RRDP (booked): Presentation skills (7/3/2017)
+  \item RRDP (booked): How to write a paper (8/3/2017)
 \end{itemize}
 
 \subsection*{Talks and conferences}
